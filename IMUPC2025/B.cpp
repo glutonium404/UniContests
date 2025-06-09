@@ -1,12 +1,12 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-string reverse_string(string& s) {
+string reverse_string(string &s) {
     string reversed;
 
-    for(int i=s.length()-1; i>=0; i--) {
+    for (int i = s.length() - 1; i >= 0; i--) {
         reversed += s[i];
     }
 
@@ -16,7 +16,7 @@ string reverse_string(string& s) {
 string dec_to_bin(int dec) {
     string bin;
 
-    while(dec > 0) {
+    while (dec > 0) {
         bin += dec % 2 == 1 ? '1' : '0';
         dec /= 2;
     }
@@ -24,10 +24,10 @@ string dec_to_bin(int dec) {
     return reverse_string(bin);
 }
 
-int do_xor(string& bin_string) {
+int do_xor(string &bin_string) {
     int result = bin_string[0] == '1' ? 1 : 0;
 
-    for(int i=1; i<bin_string.length(); i++) {
+    for (int i = 1; i < bin_string.length(); i++) {
         int curr_bit = bin_string[i] == '1' ? 1 : 0;
         result ^= curr_bit;
     }
@@ -35,11 +35,11 @@ int do_xor(string& bin_string) {
     return result;
 }
 
-int find_smallest_x(int& input, int x = 0) {
+int find_smallest_x(int &input, int x = 0) {
     int _or = (input | x);
     string bin = dec_to_bin(_or);
 
-    if(do_xor(bin)) {
+    if (do_xor(bin)) {
         return x;
     }
 
@@ -47,16 +47,16 @@ int find_smallest_x(int& input, int x = 0) {
 }
 
 int main() {
-    while(1) {
+    while (1) {
 
         int input;
         cin >> input;
 
         string bin = dec_to_bin(input);
 
-        if(do_xor(bin)) {
+        if (do_xor(bin)) {
             cout << 0 << endl;
-        }else {
+        } else {
             cout << find_smallest_x(input) << endl;
         }
     }
